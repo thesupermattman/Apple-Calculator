@@ -6,3 +6,18 @@
 //
 
 import Foundation
+
+class Model {
+    
+    struct OperatorModel {
+        enum Operator {
+            case minus
+        }
+    }
+    
+    struct NumbersModel {
+        enum Numbers {
+            case one
+        }
+    }
+}
