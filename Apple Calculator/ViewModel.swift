@@ -8,7 +8,7 @@
 import Foundation
 
 class ViewModel {
-    
+        
     var latestNumber = ""
     var latestResultNumber: Float? = nil
     var latestOperator = ""
@@ -17,19 +17,6 @@ class ViewModel {
     
     func calculate(value: String) -> String {
         if value == plusSign {
-//            if isEqualTapped {
-//                latestOperator = value
-//                //latestResultNumber = (Float(latestNumber) ?? 0) + (latestResultNumber ?? 0)
-//                latestNumber = ""
-//                isEqualTapped = false
-//                return String((latestResultNumber ?? 0))
-//            } else {
-//                latestOperator = value
-//                latestResultNumber = (Float(latestNumber) ?? 0) + (latestResultNumber ?? 0)
-//                latestNumber = ""
-//                isEqualTapped = false
-//                return String((latestResultNumber ?? 0))
-//            }
             latestOperator = value
             latestResultNumber = isEqualTapped ? latestResultNumber : (Float(latestNumber) ?? 0) + (latestResultNumber ?? 0)
             latestNumber = ""
@@ -65,17 +52,14 @@ class ViewModel {
             isEqualTapped = false
             return String(latestResultNumber ?? 0)
         } else if value == "%"{
-            latestOperator = value
-            latestResultNumber = (Float(latestNumber) ?? 0) / 100
-            latestNumber = String((latestResultNumber ?? 0))
-            latestResultNumber = 0
-            isEqualTapped = false
-            return latestNumber
+            if let notNilValue = latestResultNumber {
+                latestResultNumber = notNilValue / 100.0
+            } else {
+                latestResultNumber = (Float(latestNumber) ?? 0) / 100.0
+            }
+            return String(latestResultNumber ?? 0)
         } else if value == "+/-" {
-            latestOperator = value
-            latestResultNumber = (Float(latestNumber) ?? 0) * -1
-            latestNumber = String((latestResultNumber ?? 0))
-            return latestNumber
+            return "0"
         } else { // MARK: Only number
             // latestNumber += value
             latestNumber = latestNumber + value
@@ -87,6 +71,7 @@ class ViewModel {
         latestNumber = ""
         latestResultNumber = nil
         latestOperator = ""
+        isEqualTapped = false
         return "0.0"
     }
     
@@ -115,3 +100,17 @@ class ViewModel {
 // Fix positive negative
 // Make buttons round
 // If the above is done, then try to do the model. Also see what I could make an enum.
+
+//            if isEqualTapped {
+//                latestOperator = value
+//                //latestResultNumber = (Float(latestNumber) ?? 0) + (latestResultNumber ?? 0)
+//                latestNumber = ""
+//                isEqualTapped = false
+//                return String((latestResultNumber ?? 0))
+//            } else {
+//                latestOperator = value
+//                latestResultNumber = (Float(latestNumber) ?? 0) + (latestResultNumber ?? 0)
+//                latestNumber = ""
+//                isEqualTapped = false
+//                return String((latestResultNumber ?? 0))
+//            }
