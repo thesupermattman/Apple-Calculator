@@ -13,6 +13,7 @@ class ViewModel {
     var latestResultNumber: Float? = nil
     var latestOperator = ""
     var isEqualTapped = false
+    var negativeInputed = false
     let plusSign = "+"
     
     func calculate(value: String) -> String {
@@ -40,6 +41,7 @@ class ViewModel {
                 latestResultNumber = isEqualTapped ? latestResultNumber : Float(latestNumber)
             }
             latestNumber = ""
+            isEqualTapped = false
             return String((latestResultNumber ?? 0))
         } else if value == "/" {
             latestOperator = value
@@ -52,6 +54,7 @@ class ViewModel {
             isEqualTapped = false
             return String(latestResultNumber ?? 0)
         } else if value == "%"{
+            isEqualTapped = true
             if let notNilValue = latestResultNumber {
                 latestResultNumber = notNilValue / 100.0
             } else {
@@ -59,11 +62,38 @@ class ViewModel {
             }
             return String(latestResultNumber ?? 0)
         } else if value == "+/-" {
-            return "0"
+            if let notNilValue = latestResultNumber {
+                var latestResultNumberAsString:String = (String(notNilValue))
+                if (latestResultNumberAsString.contains("-")) {
+                    latestResultNumberAsString.remove(at: latestResultNumberAsString.startIndex)
+                    latestResultNumber = Float(latestResultNumberAsString)
+                    return String((latestResultNumber ?? 0))
+                } else {
+                    latestResultNumberAsString.insert("-", at: latestResultNumberAsString.startIndex)
+                    latestResultNumber = Float(latestResultNumberAsString)
+                    return String((latestResultNumber ?? 0))
+                }
+            } else {
+                if latestNumber.contains("-") {
+                    latestNumber.remove(at: latestNumber.startIndex)
+                    return latestNumber
+                } else {
+                    latestNumber.insert("-", at: latestNumber.startIndex)
+                    return latestNumber
+                }
+            }
         } else { // MARK: Only number
             // latestNumber += value
-            latestNumber = latestNumber + value
-            return latestNumber
+            if isEqualTapped == true { // Code so that if if a new number is entered after an equals, then it resets the calculator
+                latestNumber = ""
+                latestResultNumber = nil
+                isEqualTapped = false
+                latestNumber = latestNumber + value
+                return latestNumber
+            } else {
+                latestNumber = latestNumber + value
+                return latestNumber
+            }
         }
     }
     
@@ -96,10 +126,11 @@ class ViewModel {
 }
 
 // To do
-// Fix percent button
-// Fix positive negative
+// Make the decimal point disapear if it's .0
+// DONE: Make it so that if I type another number after pressing equals, it resets and does'nt add another number to the string
 // Make buttons round
-// If the above is done, then try to do the model. Also see what I could make an enum.
+// If the above is done, then try to do the model. Also see what I could make an enum
+// BONUS: Make the numbers smaller if there's more numbers on screen so it fits
 
 //            if isEqualTapped {
 //                latestOperator = value
@@ -114,3 +145,15 @@ class ViewModel {
 //                isEqualTapped = false
 //                return String((latestResultNumber ?? 0))
 //            }
+
+//            isEqualTapped = true
+//            if let notNilValue = latestResultNumber {
+//                latestResultNumber = notNilValue * -1
+//                latestNumber = ""
+//            } else if latestNumber == "0.0" {
+//                negativeInputed = true
+//            } else {
+//                latestResultNumber = (Float(latestNumber) ?? 0) * -1
+//                latestNumber = ""
+//            }
+            //latestNumber = ""
