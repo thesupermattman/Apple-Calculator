@@ -7,15 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AD61216C29938A4400EDF943 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD61216B29938A4400EDF943 /* ViewModel.swift */; };
+		AD61216E29938A6000EDF943 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD61216D29938A6000EDF943 /* Model.swift */; };
 		ADA173632993632F0001E3C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA173622993632F0001E3C0 /* AppDelegate.swift */; };
 		ADA173652993632F0001E3C0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA173642993632F0001E3C0 /* SceneDelegate.swift */; };
 		ADA173672993632F0001E3C0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA173662993632F0001E3C0 /* ViewController.swift */; };
 		ADA1736A2993632F0001E3C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADA173682993632F0001E3C0 /* Main.storyboard */; };
 		ADA1736C299363310001E3C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADA1736B299363310001E3C0 /* Assets.xcassets */; };
 		ADA1736F299363310001E3C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADA1736D299363310001E3C0 /* LaunchScreen.storyboard */; };
+		FE83467B5735E5F4B5044727 /* Pods_Apple_Calculator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68B7539DC1012967250C2481 /* Pods_Apple_Calculator.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		503FD9AE481FBDDDFB73B6AF /* Pods-Apple Calculator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Apple Calculator.release.xcconfig"; path = "Target Support Files/Pods-Apple Calculator/Pods-Apple Calculator.release.xcconfig"; sourceTree = "<group>"; };
+		68B7539DC1012967250C2481 /* Pods_Apple_Calculator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Apple_Calculator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A731870ADCAF59BCED8E6085 /* Pods-Apple Calculator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Apple Calculator.debug.xcconfig"; path = "Target Support Files/Pods-Apple Calculator/Pods-Apple Calculator.debug.xcconfig"; sourceTree = "<group>"; };
+		AD61216B29938A4400EDF943 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		AD61216D29938A6000EDF943 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		ADA1735F2993632F0001E3C0 /* Apple Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Apple Calculator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADA173622993632F0001E3C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADA173642993632F0001E3C0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -31,17 +39,47 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE83467B5735E5F4B5044727 /* Pods_Apple_Calculator.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5D35B23748D6B5D7F8AF4ACB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				68B7539DC1012967250C2481 /* Pods_Apple_Calculator.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		63C274132380B855562CF0CE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A731870ADCAF59BCED8E6085 /* Pods-Apple Calculator.debug.xcconfig */,
+				503FD9AE481FBDDDFB73B6AF /* Pods-Apple Calculator.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		AD61216A29938A1000EDF943 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				ADA173622993632F0001E3C0 /* AppDelegate.swift */,
+				ADA1736B299363310001E3C0 /* Assets.xcassets */,
+				ADA1736D299363310001E3C0 /* LaunchScreen.storyboard */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		ADA173562993632F0001E3C0 = {
 			isa = PBXGroup;
 			children = (
 				ADA173612993632F0001E3C0 /* Apple Calculator */,
 				ADA173602993632F0001E3C0 /* Products */,
+				63C274132380B855562CF0CE /* Pods */,
+				5D35B23748D6B5D7F8AF4ACB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,12 +94,12 @@
 		ADA173612993632F0001E3C0 /* Apple Calculator */ = {
 			isa = PBXGroup;
 			children = (
-				ADA173622993632F0001E3C0 /* AppDelegate.swift */,
+				AD61216A29938A1000EDF943 /* Supporting Files */,
 				ADA173642993632F0001E3C0 /* SceneDelegate.swift */,
-				ADA173662993632F0001E3C0 /* ViewController.swift */,
 				ADA173682993632F0001E3C0 /* Main.storyboard */,
-				ADA1736B299363310001E3C0 /* Assets.xcassets */,
-				ADA1736D299363310001E3C0 /* LaunchScreen.storyboard */,
+				ADA173662993632F0001E3C0 /* ViewController.swift */,
+				AD61216B29938A4400EDF943 /* ViewModel.swift */,
+				AD61216D29938A6000EDF943 /* Model.swift */,
 				ADA17370299363310001E3C0 /* Info.plist */,
 			);
 			path = "Apple Calculator";
@@ -74,9 +112,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ADA17373299363310001E3C0 /* Build configuration list for PBXNativeTarget "Apple Calculator" */;
 			buildPhases = (
+				31B885F2B7647E7171CBE1BE /* [CP] Check Pods Manifest.lock */,
 				ADA1735B2993632F0001E3C0 /* Sources */,
 				ADA1735C2993632F0001E3C0 /* Frameworks */,
 				ADA1735D2993632F0001E3C0 /* Resources */,
+				8300E02E5BD916BF62DBA9E1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -133,13 +173,57 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		31B885F2B7647E7171CBE1BE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Apple Calculator-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8300E02E5BD916BF62DBA9E1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Apple Calculator/Pods-Apple Calculator-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Apple Calculator/Pods-Apple Calculator-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Apple Calculator/Pods-Apple Calculator-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		ADA1735B2993632F0001E3C0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD61216E29938A6000EDF943 /* Model.swift in Sources */,
 				ADA173672993632F0001E3C0 /* ViewController.swift in Sources */,
 				ADA173632993632F0001E3C0 /* AppDelegate.swift in Sources */,
+				AD61216C29938A4400EDF943 /* ViewModel.swift in Sources */,
 				ADA173652993632F0001E3C0 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -282,6 +366,7 @@
 		};
 		ADA17374299363310001E3C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A731870ADCAF59BCED8E6085 /* Pods-Apple Calculator.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -310,6 +395,7 @@
 		};
 		ADA17375299363310001E3C0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 503FD9AE481FBDDDFB73B6AF /* Pods-Apple Calculator.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
