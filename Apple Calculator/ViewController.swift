@@ -10,10 +10,31 @@ import UIKit
 class ViewController: UIViewController {
     
     var viewModel = ViewModel()
-
+    
+    @IBOutlet weak var buttonAC: UIButton!
+    @IBOutlet weak var buttonPositiveNegative: UIButton!
+    @IBOutlet weak var buttonPercent: UIButton!
+    @IBOutlet weak var buttonDivide: UIButton!
+    @IBOutlet weak var buttonMultiply: UIButton!
+    @IBOutlet weak var buttonMinus: UIButton!
+    @IBOutlet weak var buttonAdd: UIButton!
+    @IBOutlet weak var buttonEquals: UIButton!
+    @IBOutlet weak var button0: UIButton!
+    @IBOutlet weak var button1: UIButton!
+    @IBOutlet weak var button2: UIButton!
+    @IBOutlet weak var button3: UIButton!
+    @IBOutlet weak var button4: UIButton!
+    @IBOutlet weak var button5: UIButton!
+    @IBOutlet weak var button6: UIButton!
+    @IBOutlet weak var button7: UIButton!
+    @IBOutlet weak var button8: UIButton!
+    @IBOutlet weak var button9: UIButton!
+    @IBOutlet weak var buttonDecimal: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        makeButtonsRound(for: [buttonAC, button0, button1, button2, button3, button4, button5, button6, button7, button8, button9, buttonAdd, buttonMinus, buttonDivide, buttonMultiply, buttonEquals, buttonDecimal, buttonPercent, buttonPositiveNegative, buttonEquals])
     }
     
     @IBOutlet weak var calculatorLabel: UILabel!
@@ -94,5 +115,13 @@ class ViewController: UIViewController {
     @IBAction func buttonDecimal(_ sender: UIButton) {
         calculatorLabel.text = viewModel.calculate(value: ".")
 
+    }
+    
+    func makeButtonsRound(for buttons: [UIButton]) {
+        buttons.forEach {button in
+            button.layer.cornerRadius = 41
+            button.layer.masksToBounds = true
+
+        }
     }
 }

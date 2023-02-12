@@ -4,6 +4,11 @@
 //
 //  Created by arthithai.aamlid on 8/2/2566 BE.
 //
+extension Float {
+    var removeDecimal: String {
+       return self.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
+    }
+}
 
 import Foundation
 
@@ -13,8 +18,9 @@ class ViewModel {
     var latestResultNumber: Float? = nil
     var latestOperator = ""
     var isEqualTapped = false
-    var negativeInputed = false
+    var latestOperatorInputedWithoutEquals = true
     let plusSign = "+"
+    
     
     func calculate(value: String) -> String {
         if value == plusSign {
@@ -22,7 +28,7 @@ class ViewModel {
             latestResultNumber = isEqualTapped ? latestResultNumber : (Float(latestNumber) ?? 0) + (latestResultNumber ?? 0)
             latestNumber = ""
             isEqualTapped = false
-            return String((latestResultNumber ?? 0))
+            return String((latestResultNumber ?? 0).removeDecimal)
         } else if value == "-" {
             latestOperator = value
             if let notNilValue = latestResultNumber {
@@ -32,7 +38,7 @@ class ViewModel {
             }
             latestNumber = ""
             isEqualTapped = false
-            return String((latestResultNumber ?? 0))
+            return String((latestResultNumber ?? 0).removeDecimal)
         } else if value == "*" {
             latestOperator = value
             if let notNilValue = latestResultNumber {
@@ -42,7 +48,7 @@ class ViewModel {
             }
             latestNumber = ""
             isEqualTapped = false
-            return String((latestResultNumber ?? 0))
+            return String((latestResultNumber ?? 0).removeDecimal)
         } else if value == "/" {
             latestOperator = value
             if let notNilValue = latestResultNumber {
@@ -52,7 +58,7 @@ class ViewModel {
             }
             latestNumber = ""
             isEqualTapped = false
-            return String(latestResultNumber ?? 0)
+            return String((latestResultNumber ?? 0).removeDecimal)
         } else if value == "%"{
             isEqualTapped = true
             if let notNilValue = latestResultNumber {
@@ -60,18 +66,18 @@ class ViewModel {
             } else {
                 latestResultNumber = (Float(latestNumber) ?? 0) / 100.0
             }
-            return String(latestResultNumber ?? 0)
+            return String((latestResultNumber ?? 0).removeDecimal)
         } else if value == "+/-" {
             if let notNilValue = latestResultNumber {
                 var latestResultNumberAsString:String = (String(notNilValue))
                 if (latestResultNumberAsString.contains("-")) {
                     latestResultNumberAsString.remove(at: latestResultNumberAsString.startIndex)
                     latestResultNumber = Float(latestResultNumberAsString)
-                    return String((latestResultNumber ?? 0))
+                    return String((latestResultNumber ?? 0).removeDecimal)
                 } else {
                     latestResultNumberAsString.insert("-", at: latestResultNumberAsString.startIndex)
                     latestResultNumber = Float(latestResultNumberAsString)
-                    return String((latestResultNumber ?? 0))
+                    return String((latestResultNumber ?? 0).removeDecimal)
                 }
             } else {
                 if latestNumber.contains("-") {
@@ -102,23 +108,23 @@ class ViewModel {
         latestResultNumber = nil
         latestOperator = ""
         isEqualTapped = false
-        return "0.0"
+        return "0"
     }
     
     func equals() -> String {
         isEqualTapped = true
         if latestOperator == "+" {
             latestResultNumber = (Float(latestNumber) ?? 0) + (latestResultNumber ?? 0)
-            return String((latestResultNumber ?? 0))
+            return String((latestResultNumber ?? 0).removeDecimal)
         } else if latestOperator == "-" {
             latestResultNumber = (latestResultNumber ?? 0) - (Float(latestNumber) ?? 0)
-            return String((latestResultNumber ?? 0))
+            return String((latestResultNumber ?? 0).removeDecimal)
         } else if latestOperator == "*" {
             latestResultNumber = (Float(latestNumber) ?? 0) * (latestResultNumber ?? 0)
-            return String((latestResultNumber ?? 0))
+            return String((latestResultNumber ?? 0).removeDecimal)
         } else if latestOperator == "/" {
             latestResultNumber = (latestResultNumber ?? 0) / (Float(latestNumber) ?? 0)
-            return String((latestResultNumber ?? 0))
+            return String((latestResultNumber ?? 0).removeDecimal)
         } else {
             return "0"
         }
@@ -126,9 +132,10 @@ class ViewModel {
 }
 
 // To do
-// Make the decimal point disapear if it's .0
+// DONE: Make the decimal point disapear if it's .0
 // DONE: Make it so that if I type another number after pressing equals, it resets and does'nt add another number to the string
-// Make buttons round
+// DONE: Make buttons round
+// Fix the problem where I can't continue an equation after entering another function
 // If the above is done, then try to do the model. Also see what I could make an enum
 // BONUS: Make the numbers smaller if there's more numbers on screen so it fits
 
