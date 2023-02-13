@@ -7,17 +7,15 @@
 
 import Foundation
 
-class Model {
+struct Model {
     
-    struct OperatorModel {
-        enum Operator {
-            case minus
-        }
-    }
-    
-    struct NumbersModel {
-        enum Numbers {
-            case one
-        }
+    enum OperatorType: String {
+        case plusSign = "+"
+        case minusSign = "-"
+        case multiplySign = "*"
+        case divideSign = "/"
+        case percentSign = "%"
+        case positiveNegativeSign = "+/-"
+        //case number(value: String)
     }
 }

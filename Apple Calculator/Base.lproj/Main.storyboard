@@ -61,7 +61,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sk4-9a-P4w">
                                                 <rect key="frame" x="302.33333333333331" y="0.0" width="90.666666666666686" height="83.666666666666671"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="filled" title="/">
+                                                <buttonConfiguration key="configuration" style="filled" title="÷">
                                                     <fontDescription key="titleFontDescription" type="system" pointSize="30"/>
                                                     <color key="baseBackgroundColor" systemColor="systemOrangeColor"/>
                                                 </buttonConfiguration>

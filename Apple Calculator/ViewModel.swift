@@ -15,17 +15,16 @@ import Foundation
 class ViewModel {
         
     var latestNumber = ""
-    var latestResultNumber: Float? = nil
-    var latestOperator = ""
+    var latestResultNumber: Float?
+    var latestOperator: Model.OperatorType?
     var isEqualTapped = false
     var latestOperatorInputedWithoutEquals = true
-    let plusSign = "+"
     
-    
-    func calculate(value: String) -> String {
-        if value == plusSign {
+    func calculate(operatorType: Model.OperatorType) -> String {
+        switch operatorType {
+        case .plusSign:
             if let notNilValue = latestResultNumber {
-                if latestOperator != "+" && isEqualTapped == false{
+                if latestOperator != .plusSign && isEqualTapped == false{
                     latestResultNumber = Float(equals())
                 } else {
                     latestResultNumber = isEqualTapped ? latestResultNumber : (Float(latestNumber) ?? 0) + notNilValue
@@ -33,13 +32,13 @@ class ViewModel {
             } else {
                 latestResultNumber = isEqualTapped ? latestResultNumber : Float(latestNumber)
             }
-            latestOperator = value
+            latestOperator = .plusSign
             latestNumber = ""
             isEqualTapped = false
             return String((latestResultNumber ?? 0).removeDecimal)
-        } else if value == "-" {
+        case .minusSign:
             if let notNilValue = latestResultNumber {
-                if latestOperator != "-" && isEqualTapped == false {
+                if latestOperator != .minusSign && isEqualTapped == false {
                     latestResultNumber = Float(equals())
                 }
                 else {
@@ -48,13 +47,13 @@ class ViewModel {
             } else {
                 latestResultNumber = isEqualTapped ? latestResultNumber : Float(latestNumber)
             }
-            latestOperator = value
+            latestOperator = .minusSign
             latestNumber = ""
             isEqualTapped = false
             return String((latestResultNumber ?? 0).removeDecimal)
-        } else if value == "*" {
+        case.multiplySign:
             if let notNilValue = latestResultNumber {
-                if latestOperator != "*" && isEqualTapped == false {
+                if latestOperator != .multiplySign && isEqualTapped == false {
                     latestResultNumber = Float(equals())
                 } else {
                     latestResultNumber = isEqualTapped ? latestResultNumber : notNilValue * (Float(latestNumber) ?? 0)
@@ -62,13 +61,13 @@ class ViewModel {
             } else {
                 latestResultNumber = isEqualTapped ? latestResultNumber : Float(latestNumber)
             }
-            latestOperator = value
+            latestOperator = .multiplySign
             latestNumber = ""
             isEqualTapped = false
             return String((latestResultNumber ?? 0).removeDecimal)
-        } else if value == "/" {
+        case.divideSign:
             if let notNilValue = latestResultNumber {
-                if latestOperator != "/" && isEqualTapped == false {
+                if latestOperator != .divideSign && isEqualTapped == false {
                     latestResultNumber = Float(equals())
                 } else {
                     latestResultNumber = isEqualTapped ? latestResultNumber : notNilValue / (Float(latestNumber) ?? 0)
@@ -76,11 +75,11 @@ class ViewModel {
             } else {
                 latestResultNumber = isEqualTapped ? latestResultNumber : Float(latestNumber)
             }
-            latestOperator = value
+            latestOperator = .divideSign
             latestNumber = ""
             isEqualTapped = false
             return String((latestResultNumber ?? 0).removeDecimal)
-        } else if value == "%"{
+        case.percentSign:
             isEqualTapped = true
             if let notNilValue = latestResultNumber {
                 latestResultNumber = notNilValue / 100.0
@@ -88,72 +87,71 @@ class ViewModel {
                 latestResultNumber = (Float(latestNumber) ?? 0) / 100.0
             }
             return String((latestResultNumber ?? 0).removeDecimal)
-        } else if value == "+/-" {
+        case.positiveNegativeSign:
             if let notNilValue = latestResultNumber {
-                if latestOperator != "" && isEqualTapped == false {
+                if latestOperator != nil && isEqualTapped == false {
                     if latestNumber.contains("-") {
                         latestNumber.remove(at: latestNumber.startIndex)
-                        return latestNumber
                     } else {
                         latestNumber.insert("-", at: latestNumber.startIndex)
-                        return latestNumber
                     }
+                    return latestNumber
                 } else {
                     var latestResultNumberAsString:String = (String(notNilValue))
                     if (latestResultNumberAsString.contains("-")) {
                         latestResultNumberAsString.remove(at: latestResultNumberAsString.startIndex)
                         latestResultNumber = Float(latestResultNumberAsString)
-                        return String((latestResultNumber ?? 0).removeDecimal)
                     } else {
                         latestResultNumberAsString.insert("-", at: latestResultNumberAsString.startIndex)
                         latestResultNumber = Float(latestResultNumberAsString)
-                        return String((latestResultNumber ?? 0).removeDecimal)
                     }
+                    return String((latestResultNumber ?? 0).removeDecimal)
                 }
             } else {
                 if latestNumber.contains("-") {
                     latestNumber.remove(at: latestNumber.startIndex)
-                    return latestNumber
                 } else {
                     latestNumber.insert("-", at: latestNumber.startIndex)
-                    return latestNumber
                 }
-            }
-        } else { // MARK: Only number
-            // latestNumber += value
-            if isEqualTapped == true { // Code so that if if a new number is entered after an equals, then it resets the calculator
-                latestNumber = ""
-                latestResultNumber = nil
-                isEqualTapped = false
-                latestNumber = latestNumber + value
-                return latestNumber
-            } else {
-                latestNumber = latestNumber + value
                 return latestNumber
             }
+        }
+    }
+    
+    func inputNumber(value: String) -> String {
+        // latestNumber += value
+        if isEqualTapped == true { // Code so that if if a new number is entered after an equals, then it resets the calculator
+            latestNumber = ""
+            latestResultNumber = nil
+            isEqualTapped = false
+            latestNumber = latestNumber + value
+            return latestNumber
+        } else {
+            latestNumber = latestNumber + value
+            return latestNumber
         }
     }
     
     func reset() -> String {
         latestNumber = ""
         latestResultNumber = nil
-        latestOperator = ""
+        latestOperator = nil
         isEqualTapped = false
         return "0"
     }
     
     func equals() -> String {
         isEqualTapped = true
-        if latestOperator == "+" {
+        if latestOperator == .plusSign {
             latestResultNumber = (Float(latestNumber) ?? 0) + (latestResultNumber ?? 0)
             return String((latestResultNumber ?? 0).removeDecimal)
-        } else if latestOperator == "-" {
+        } else if latestOperator == .minusSign {
             latestResultNumber = (latestResultNumber ?? 0) - (Float(latestNumber) ?? 0)
             return String((latestResultNumber ?? 0).removeDecimal)
-        } else if latestOperator == "*" {
+        } else if latestOperator == .multiplySign {
             latestResultNumber = (Float(latestNumber) ?? 0) * (latestResultNumber ?? 0)
             return String((latestResultNumber ?? 0).removeDecimal)
-        } else if latestOperator == "/" {
+        } else if latestOperator == .divideSign {
             latestResultNumber = (latestResultNumber ?? 0) / (Float(latestNumber) ?? 0)
             return String((latestResultNumber ?? 0).removeDecimal)
         } else {
@@ -167,7 +165,7 @@ class ViewModel {
 // DONE: Make it so that if I type another number after pressing equals, it resets and doesn't add another number to the string
 // DONE: Make buttons round
 // DONE: Fix the problem where I can't continue an equation after entering another function
-// Fix the problem so the positive/negative button changes the number that's currently on the screen
+// DONE: Fix the problem so the positive/negative button changes the number that's currently on the screen
 // Make it so that bodmass aplies
 
 // If the above is done, then try to do the model. Also see what I could make an enum
@@ -198,3 +196,126 @@ class ViewModel {
 //                latestNumber = ""
 //            }
             //latestNumber = ""
+
+// Eqaution
+//if latestOperator == "+" && isEqualTapped == false && oldNumber == nil {
+//                    oldNumber = notNilValue
+//                    latestResultNumber = isEqualTapped ? latestResultNumber : Float(latestNumber)
+//                } else if oldNumber != nil && latestOperator == "*" {
+//                    latestResultNumber = oldNumber! + (latestResultNumber! * (Float(latestNumber) ?? 0))
+//                    oldNumber = nil
+//                }
+//                    else {
+//                    latestResultNumber = isEqualTapped ? latestResultNumber : notNilValue * (Float(latestNumber) ?? 0)
+//                }
+
+// Old function
+//func calculate(value: String) -> String {
+//        if value == plusSign {
+//            if let notNilValue = latestResultNumber {
+//                if latestOperator != "+" && isEqualTapped == false{
+//                    latestResultNumber = Float(equals())
+//                } else {
+//                    latestResultNumber = isEqualTapped ? latestResultNumber : (Float(latestNumber) ?? 0) + notNilValue
+//                }
+//            } else {
+//                latestResultNumber = isEqualTapped ? latestResultNumber : Float(latestNumber)
+//            }
+//            latestOperator = value
+//            latestNumber = ""
+//            isEqualTapped = false
+//            return String((latestResultNumber ?? 0).removeDecimal)
+//        } else if value == "-" {
+//            if let notNilValue = latestResultNumber {
+//                if latestOperator != "-" && isEqualTapped == false {
+//                    latestResultNumber = Float(equals())
+//                }
+//                else {
+//                    latestResultNumber = isEqualTapped ? latestResultNumber : notNilValue - (Float(latestNumber) ?? 0)
+//                }
+//            } else {
+//                latestResultNumber = isEqualTapped ? latestResultNumber : Float(latestNumber)
+//            }
+//            latestOperator = value
+//            latestNumber = ""
+//            isEqualTapped = false
+//            return String((latestResultNumber ?? 0).removeDecimal)
+//        } else if value == "*" {
+//            if let notNilValue = latestResultNumber {
+//                if latestOperator != "*" && isEqualTapped == false {
+//                    latestResultNumber = Float(equals())
+//                } else {
+//                    latestResultNumber = isEqualTapped ? latestResultNumber : notNilValue * (Float(latestNumber) ?? 0)
+//                }
+//            } else {
+//                latestResultNumber = isEqualTapped ? latestResultNumber : Float(latestNumber)
+//            }
+//            latestOperator = value
+//            latestNumber = ""
+//            isEqualTapped = false
+//            return String((latestResultNumber ?? 0).removeDecimal)
+//        } else if value == "/" {
+//            if let notNilValue = latestResultNumber {
+//                if latestOperator != "/" && isEqualTapped == false {
+//                    latestResultNumber = Float(equals())
+//                } else {
+//                    latestResultNumber = isEqualTapped ? latestResultNumber : notNilValue / (Float(latestNumber) ?? 0)
+//                }
+//            } else {
+//                latestResultNumber = isEqualTapped ? latestResultNumber : Float(latestNumber)
+//            }
+//            latestOperator = value
+//            latestNumber = ""
+//            isEqualTapped = false
+//            return String((latestResultNumber ?? 0).removeDecimal)
+//        } else if value == "%"{
+//            isEqualTapped = true
+//            if let notNilValue = latestResultNumber {
+//                latestResultNumber = notNilValue / 100.0
+//            } else {
+//                latestResultNumber = (Float(latestNumber) ?? 0) / 100.0
+//            }
+//            return String((latestResultNumber ?? 0).removeDecimal)
+//        } else if value == "+/-" {
+//            if let notNilValue = latestResultNumber {
+//                if latestOperator != "" && isEqualTapped == false {
+//                    if latestNumber.contains("-") {
+//                        latestNumber.remove(at: latestNumber.startIndex)
+//                    } else {
+//                        latestNumber.insert("-", at: latestNumber.startIndex)
+//                    }
+//                    return latestNumber
+//                } else {
+//                    var latestResultNumberAsString:String = (String(notNilValue))
+//                    if (latestResultNumberAsString.contains("-")) {
+//                        latestResultNumberAsString.remove(at: latestResultNumberAsString.startIndex)
+//                        latestResultNumber = Float(latestResultNumberAsString)
+//                    } else {
+//                        latestResultNumberAsString.insert("-", at: latestResultNumberAsString.startIndex)
+//                        latestResultNumber = Float(latestResultNumberAsString)
+//                    }
+//                    return String((latestResultNumber ?? 0).removeDecimal)
+//                }
+//            } else {
+//                if latestNumber.contains("-") {
+//                    latestNumber.remove(at: latestNumber.startIndex)
+//                    return latestNumber
+//                } else {
+//                    latestNumber.insert("-", at: latestNumber.startIndex)
+//                    return latestNumber
+//                }
+//            }
+//        } else { // MARK: Only number
+//            // latestNumber += value
+//            if isEqualTapped == true { // Code so that if if a new number is entered after an equals, then it resets the calculator
+//                latestNumber = ""
+//                latestResultNumber = nil
+//                isEqualTapped = false
+//                latestNumber = latestNumber + value
+//                return latestNumber
+//            } else {
+//                latestNumber = latestNumber + value
+//                return latestNumber
+//            }
+//        }
+//    }

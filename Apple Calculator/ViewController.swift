@@ -35,6 +35,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         makeButtonsRound(for: [buttonAC, button0, button1, button2, button3, button4, button5, button6, button7, button8, button9, buttonAdd, buttonMinus, buttonDivide, buttonMultiply, buttonEquals, buttonDecimal, buttonPercent, buttonPositiveNegative, buttonEquals])
+        
+        //self.view.sub
     }
     
     @IBOutlet weak var calculatorLabel: UILabel!
@@ -44,28 +46,27 @@ class ViewController: UIViewController {
     }
     
     @IBAction func buttonPositiveNegative(_ sender: UIButton) {
-        calculatorLabel.text = viewModel.calculate(value: "+/-")
+        calculatorLabel.text = viewModel.calculate(operatorType: .positiveNegativeSign)
     }
     
     @IBAction func buttonPercent(_ sender: UIButton) {
-        calculatorLabel.text = viewModel.calculate(value: "%")
-
+        calculatorLabel.text = viewModel.calculate(operatorType: .percentSign)
     }
     
     @IBAction func buttonDivide(_ sender: UIButton) {
-        calculatorLabel.text = viewModel.calculate(value: "/")
+        calculatorLabel.text = viewModel.calculate(operatorType: .divideSign)
     }
     
     @IBAction func buttonMultiply(_ sender: UIButton) {
-        calculatorLabel.text = viewModel.calculate(value: "*")
+        calculatorLabel.text = viewModel.calculate(operatorType: .multiplySign)
     }
     
     @IBAction func buttonMinus(_ sender: UIButton) {
-        calculatorLabel.text = viewModel.calculate(value: "-")
+        calculatorLabel.text = viewModel.calculate(operatorType: .minusSign)
     }
     
     @IBAction func buttonAdd(_ sender: UIButton) {
-        calculatorLabel.text = viewModel.calculate(value: "+")
+        calculatorLabel.text = viewModel.calculate(operatorType: .plusSign)
     }
     
     @IBAction func buttonEquals(_ sender: UIButton) {
@@ -73,47 +74,48 @@ class ViewController: UIViewController {
     }
     
     @IBAction func button0(_ sender: UIButton) {
-        calculatorLabel.text = viewModel.calculate(value: "0")
+        calculatorLabel.text = viewModel.inputNumber(value: "0")
+        //calculatorLabel.text = viewModel.calculate(buttonType: .number(value: "0"))
     }
     
     @IBAction func button1(_ sender: UIButton) {
-        calculatorLabel.text = viewModel.calculate(value: "1")
+        calculatorLabel.text = viewModel.inputNumber(value: "1")
     }
     
     @IBAction func button2(_ sender: UIButton) {
-        calculatorLabel.text = viewModel.calculate(value: "2")
+        calculatorLabel.text = viewModel.inputNumber(value: "2")
     }
     
     @IBAction func button3(_ sender: UIButton) {
-        calculatorLabel.text = viewModel.calculate(value: "3")
+        calculatorLabel.text = viewModel.inputNumber(value: "3")
     }
     
     @IBAction func button4(_ sender: UIButton) {
-        calculatorLabel.text = viewModel.calculate(value: "4")
+        calculatorLabel.text = viewModel.inputNumber(value: "4")
     }
     
     @IBAction func button5(_ sender: UIButton) {
-        calculatorLabel.text = viewModel.calculate(value: "5")
+        calculatorLabel.text = viewModel.inputNumber(value: "5")
     }
     
     @IBAction func button6(_ sender: UIButton) {
-        calculatorLabel.text = viewModel.calculate(value: "6")
+        calculatorLabel.text = viewModel.inputNumber(value: "6")
     }
     
     @IBAction func button7(_ sender: UIButton) {
-        calculatorLabel.text = viewModel.calculate(value: "7")
+        calculatorLabel.text = viewModel.inputNumber(value: "7")
     }
     
     @IBAction func button8(_ sender: UIButton) {
-        calculatorLabel.text = viewModel.calculate(value: "8")
+        calculatorLabel.text = viewModel.inputNumber(value: "8")
     }
     
     @IBAction func button9(_ sender: UIButton) {
-        calculatorLabel.text = viewModel.calculate(value: "9")
+        calculatorLabel.text = viewModel.inputNumber(value: "9")
     }
     
     @IBAction func buttonDecimal(_ sender: UIButton) {
-        calculatorLabel.text = viewModel.calculate(value: ".")
+        calculatorLabel.text = viewModel.inputNumber(value: ".")
 
     }
     
@@ -121,7 +123,6 @@ class ViewController: UIViewController {
         buttons.forEach {button in
             button.layer.cornerRadius = 41
             button.layer.masksToBounds = true
-
         }
     }
 }
